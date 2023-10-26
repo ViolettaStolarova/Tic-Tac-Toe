@@ -11,21 +11,21 @@ body{
 .container{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.5fr 0.5fr 4fr 1fr;
+    grid-template-rows: auto 0.2fr auto auto auto;
     grid-template-areas: "title"
                          "currentPlayer"
                          "box-wrapper"
+                         "statistics"
                          "inf-wrapper";
 
     flex-direction: column;
     justify-items: center;
     align-items:center;
 
-    height: 100vh;
+    height: 98.5vh;
     max-width: 1920px;
     margin: 0 auto;
-    padding-top: 10px;
-    
+
     background-color: #fdfd7e;
 }
 
@@ -34,6 +34,8 @@ body{
 
     font-weight: 700;
     font-size: 35px;
+
+    margin: 0;
 
     text-shadow: -3px 4px 5px #d7b613;
 }
@@ -48,20 +50,19 @@ body{
     text-shadow: -3px 4px 5px #d7b613;
 }
 
-
-
-
 .box-wrapper {
     grid-area: box-wrapper;
 }
 
 .box {
     display: grid;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: repeat(3, auto);
     gap:5px;
 
-    width: 380px;
-    height: 380px;
+    width: 400px;
+    height: 400px;
 }
 
 .box-item {
@@ -82,13 +83,29 @@ body{
     box-shadow: -6px 6px 5px #d7b613;
 
     -webkit-tap-highlight-color: transparent;
+
+    transition: background-color 0.2s;
 }
 .box-item:hover{
     background-color: #f8f8efe9;
 }
 
-.game-status {
-    
+.statistics{
+    grid-area: statistics;
+
+    display: flex;
+    align-items: center;
+
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.statistics table {
+    background-color: #f2f2b0;
+    box-shadow: -6px 6px 5px #d7b613;
+    border-radius: 5px;
+
+    padding: 5px;
 }
 
 .inf-wrapper{
@@ -97,8 +114,12 @@ body{
 
 .btn-restart {
     background-color: #f2f2b0;
+    color:#000;
     border: 3px solid #000;
     border-radius: 5px;
+
+    text-decoration: none;
+    outline: none;
 
     font-family: 'Unbounded', sans-serif;
     font-weight: 700;
@@ -109,4 +130,26 @@ body{
     cursor: pointer;
     box-shadow: -6px 6px 5px #d7b613;
     -webkit-tap-highlight-color: transparent;
+
+    transition: background-color 0.3s, transform 0.2s;
+}
+.btn-restart:hover{
+    background-color: #f8f8efe9;
+}
+.btn-restart:active{
+    background-color: #f2f2b0;
+    box-shadow: -2px 2px 5px #ac9210;
+    transform: translate(-6px,-3px)
+}
+
+
+@media (max-width: 450px) {
+    .box {
+        width: 290px;
+        height: 290px;
+    }
+    .box-item {
+        width: 90px;
+        height: 90px;
+    }
 }
