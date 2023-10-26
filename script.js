@@ -1,6 +1,7 @@
 const area = document.getElementsByClassName('box-wrapper');
 const boxItems = document.querySelectorAll('.box-item');
-
+let currrentPlayer = document.getElementById('current-player');
+const curPlayerContainer = document.querySelector('.currentPlayer');
 
 let player = 'X';
 const winCombinations = [
@@ -24,6 +25,7 @@ for(let i = 0; i < boxItems.length; i++){
 
 function boxItemsClick () {
     let arr = [];
+    curPlayerContainer.style.display = 'block';
 
     if(!this.innerHTML){
         this.innerHTML = player;
@@ -51,11 +53,13 @@ function boxItemsClick () {
             restart('Draw');
         }
     }
-    
+
+    currrentPlayer.innerHTML = player;
+
     if(player == 'X'){
         player ='0';
     }else player = 'X';
-    console.log(arr);
+    
 }
 
 
@@ -77,6 +81,7 @@ function checkWin(arr) {
 
 function restart (message) {
     alert(message);
+    curPlayerContainer.style.display = 'none';
     for(let i in boxItems){
         boxItems[i].innerHTML = '';
     }
