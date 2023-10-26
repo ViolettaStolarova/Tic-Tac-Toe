@@ -2,6 +2,7 @@ const area = document.getElementsByClassName('box-wrapper');
 const boxItems = document.querySelectorAll('.box-item');
 let currrentPlayer = document.getElementById('current-player');
 const curPlayerContainer = document.querySelector('.currentPlayer');
+const restartBtn = document.querySelector('.btn-restart');
 
 let player = 'X';
 const winCombinations = [
@@ -14,6 +15,12 @@ const winCombinations = [
     [0,4,8],
     [2,4,6]
 ];
+
+let statistics = {
+    'X': 0,
+    '0': 0,
+    'Draw': 0
+}
 
 for(let i = 0; i < boxItems.length; i++){
     boxItems[i].setAttribute('index', i);
@@ -41,24 +48,31 @@ function boxItemsClick () {
         }
     }
 
-    if(checkWin(arr)) {
+    if(checkWin(arr)) { 
+        statistics[player] += 1;
         restart('Winner: ' + player);
     }
-    else{
+    if(!checkWin(arr)){
         let draw = true;
+        let temp=0;
         for(let i in boxItems){
             if(boxItems[i].innerHTML == '') draw=false;
+            if(i==8 && draw == true){
+                statistics.Draw += 1;
+            restart('Draw');
+            }
         }
+
         if(draw) {
+            statistics.Draw += 1;
             restart('Draw');
         }
     }
 
-    currrentPlayer.innerHTML = player;
-
     if(player == 'X'){
         player ='0';
     }else player = 'X';
+    currrentPlayer.innerHTML = player;
     
 }
 
@@ -79,10 +93,28 @@ function checkWin(arr) {
     return false;
 }
 
-function restart (message) {
+function restart (message='Restart?') {
     alert(message);
     curPlayerContainer.style.display = 'none';
     for(let i in boxItems){
         boxItems[i].innerHTML = '';
     }
+    updateSt();
 }
+
+function updateSt() {
+    document.getElementById('countX').innerHTML = statistics.X;
+    document.getElementById('countO').innerHTML = statistics[0];
+    document.getElementById('countDraw').innerHTML = statistics.Draw;
+}
+
+restartBtn.addEventListener('click', restartBtnClick = () =>{
+    curPlayerContainer.style.display = 'none';
+    for(let i in boxItems){
+        boxItems[i].innerHTML = '';
+    }
+    
+    document.getElementById('countX').innerHTML = 0;
+    document.getElementById('countO').innerHTML = 0;
+    document.getElementById('countDraw').innerHTML = 0;
+});
