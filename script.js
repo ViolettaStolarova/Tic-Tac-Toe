@@ -113,8 +113,12 @@ restartBtn.addEventListener('click', restartBtnClick = () =>{
     for(let i in boxItems){
         boxItems[i].innerHTML = '';
     }
-    
+
     document.getElementById('countX').innerHTML = 0;
     document.getElementById('countO').innerHTML = 0;
     document.getElementById('countDraw').innerHTML = 0;
+
+    statistics.X = 0;
+    statistics[0] = 0;
+    statistics.Draw = 0;
 });
